@@ -1,0 +1,64 @@
+CREATE DATABASE DADOSNITT;
+USE DADOSNITT;
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    sobrenome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+CREATE TABLE materias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    professor VARCHAR(100),
+    status VARCHAR(50),
+    descricao TEXT,
+    usuario_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+CREATE TABLE atividades (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT NOT NULL, -- Descrição detalhada da atividade (O que)
+    motivo TEXT,             -- Justificativa para a realização da atividade (Por que fazer?)
+    responsavel VARCHAR(100), -- Responsável pela execução da atividade (Quem vai fazer)
+    tipo_atividade ENUM('Horas', 'Lista de Exercício', 'Documento', 'Projeto') NOT NULL, -- Tipo de atividade (Mensurável)
+    quantidade INT,          -- Quantidade associada ao tipo de atividade (horas, exercícios, páginas)
+    viavel ENUM('Sim', 'Não'), -- Indica se é possível com os recursos atuais (Attainable)
+    prioridade INT,           -- Nível de prioridade da atividade (Relevant)
+    prazo DATE,               -- Prazo para conclusão da atividade (Time-Based)
+    status VARCHAR(50),
+    materia_id INT,
+    usuario_id INT,
+    FOREIGN KEY (materia_id) REFERENCES materias(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+
+CREATE TABLE FrasesMotivac (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Frase VARCHAR(255)
+);
+
+INSERT INTO FrasesMotivac (Frase) VALUES
+('O segredo do sucesso é começar antes de estar pronto.'),
+('A jornada de mil milhas começa com um único passo.'),
+('Acredite em si mesmo e em tudo que você é. Saiba que há algo dentro de você que é maior do que qualquer obstáculo.'),
+('O sucesso é a soma de pequenos esforços repetidos dia após dia.'),
+('Não é sobre quanto você estuda, mas sobre como você estuda.'),
+('A persistência é o caminho do êxito.'),
+('Você nunca é velho demais para definir outra meta ou sonhar um novo sonho.'),
+('O sucesso é a melhor vingança para quem duvida de você.'),
+('Nunca desista de um sonho só por causa do tempo que levará para realizá-lo. O tempo passará de qualquer maneira.'),
+('O fracasso é a oportunidade de recomeçar com mais inteligência.'),
+('Não tenha medo de falhar, tenha medo de não tentar.'),
+('O que você faz hoje pode melhorar todos os seus amanhãs.'),
+('O estudo é a chave para o sucesso, mas a prática é a fechadura.'),
+('A disciplina é a ponte entre metas e realizações.'),
+('A vontade de vencer é importante, mas a vontade de se preparar é vital.'),
+('Cada novo dia é uma nova chance para você alcançar seus objetivos.'),
+('O sucesso não é o resultado de um jogo de sorte, mas de trabalho árduo e dedicação.'),
+('Você é mais forte do que pensa e mais capaz do que imagina.'),
+('Grandes coisas nunca vêm de zonas de conforto.'),
+('O conhecimento é poder, mas a prática é a chave para desbloqueá-lo.');
