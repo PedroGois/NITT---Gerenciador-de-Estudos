@@ -53,8 +53,7 @@ if (!isset($_SESSION["email"])) {
     <link href="../css/styles.css" rel="stylesheet">
 </head>
 <body class="pagina-atividades"> 
-   
-    <main>
+    <main class="mb-6">
         <?php 
         if (isset($_GET['erro'])) {
             $mensagemErro = urldecode($_GET['erro']);
@@ -67,65 +66,59 @@ if (!isset($_SESSION["email"])) {
             echo '<div class="alert alert-danger" role="alert">' . $mensagem . '</div>';
         }    
         ?>
-        <div class="container-fluid px-4">
-            <h1 class="mt-4 text-primary mx-4">Aqui estão suas metas!</h1>
-            <ol class="breadcrumb mb-4 mx-4">
-                <li class="breadcrumb-item active"><?php echo $fraseMotivacional; ?></li>
-            </ol>
-            <div class="meta-container">
-                <?php while ($row = mysqli_fetch_assoc($resultAtividades)) { ?>
-                    <div class="card-body1">
-                        <div class="meta">
-                            <div class="meta-item">
-                                <div class="meta-value-large"><?php echo htmlspecialchars($row['nome']); ?></div>
+        <div class="meta-container row">
+            <?php while ($row = mysqli_fetch_assoc($resultAtividades)) { ?>
+                <div class="card-body1 col-5">
+                    <div class="meta">
+                        <div class="meta-item">
+                            <div class="meta-value-large"><?php echo htmlspecialchars($row['nome']); ?></div>
+                        </div>
+                        <?php 
+                        $priority = htmlspecialchars($row['prioridade']);
+                        $color = '';
+                        if ($priority == 1) {
+                            $color = '#dc3545'; // Vermelho
+                        } elseif ($priority == 2) {
+                            $color = '#ff7f50'; // Coral
+                        } elseif ($priority == 3) {
+                            $color = '#ffd700'; // Amarelo
+                        } elseif ($priority == 4) {
+                            $color = '#adff2f'; // Verde limão
+                        } else {
+                            $color = '#1e90ff'; // Azul
+                        }
+                        ?>
+                        <div class="meta-item">
+                            <div class="meta-priority" style="color: <?php echo $color; ?>;">
+                                Prioridade: <?php echo $priority; ?>
                             </div>
-                            <?php 
-                            $priority = htmlspecialchars($row['prioridade']);
-                            $color = '';
-                            if ($priority == 1) {
-                                $color = '#dc3545'; // Vermelho
-                            } elseif ($priority == 2) {
-                                $color = '#ff7f50'; // Coral
-                            } elseif ($priority == 3) {
-                                $color = '#ffd700'; // Amarelo
-                            } elseif ($priority == 4) {
-                                $color = '#adff2f'; // Verde limão
-                            } else {
-                                $color = '#1e90ff'; // Azul
-                            }
-                            ?>
-                            <div class="meta-item">
-                                <div class="meta-priority" style="color: <?php echo $color; ?>;">
-                                    Prioridade: <?php echo $priority; ?>
-                                </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-value-medium">Sobre: <?php echo htmlspecialchars($row['nome_materia']); ?></div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-value-small">Prazo: <?php echo htmlspecialchars($row['prazo']); ?></div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-value-small">Status: <?php echo htmlspecialchars($row['status']); ?></div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-description">Descrição: <?php echo htmlspecialchars($row['descricao']); ?></div>
+                        </div>
+                        <div class="meta-button">
+                            <div class="meta-value-play">
+                                <button class="iniciar-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#pomodoroModal" data-id="<?php echo $row['id']; ?>" data-nome="<?php echo htmlspecialchars($row['nome']); ?>" data-descricao="<?php echo htmlspecialchars($row['descricao']); ?>">Iniciar</button>
                             </div>
-                            <div class="meta-item">
-                                <div class="meta-value-medium">Sobre: <?php echo htmlspecialchars($row['nome_materia']); ?></div>
+                            <div class="meta-value-edit">
+                                <a href="editatividade.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">Editar</a>
                             </div>
-                            <div class="meta-item">
-                                <div class="meta-value-small">Prazo: <?php echo htmlspecialchars($row['prazo']); ?></div>
-                            </div>
-                            <div class="meta-item">
-                                <div class="meta-value-small">Status: <?php echo htmlspecialchars($row['status']); ?></div> <!-- Status da atividade -->
-                            </div>
-                            <div class="meta-item">
-                                <div class="meta-value-small">Descrição: <?php echo htmlspecialchars($row['descricao']); ?></div> <!-- Descrição da atividade -->
-                            </div>
-                            <div class="meta-button">
-                                <div class="meta-value-play">
-                                    <button class="iniciar-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#pomodoroModal" data-id="<?php echo $row['id']; ?>" data-nome="<?php echo htmlspecialchars($row['nome']); ?>" data-descricao="<?php echo htmlspecialchars($row['descricao']); ?>">Iniciar</button>
-                                </div>
-                                <div class="meta-value-edit">
-                                    <a href="editatividade.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">Editar</a>
-                                </div>
-                                <div class="meta-value-delete">
-                                    <a href="../controller/deleteatividade.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Excluir</a>
-                                </div>
+                            <div class="meta-value-delete">
+                                <a href="../controller/deleteatividade.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Excluir</a>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-            </div>
+                </div>
+            <?php } ?>
         </div>
 
         <!-- Modal do Pomodoro -->

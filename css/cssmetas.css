@@ -91,6 +91,7 @@ body.pagina-relatorios{
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
 }
+
 .card {
     margin-bottom: 20px;
   }
@@ -114,34 +115,30 @@ body.pagina-relatorios{
 
 /* Para Firefox */
 .meta-container {
-  overflow-y: auto; /* Enables vertical scrollbar */
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: #0d6efd transparent; /* Scrollbar color and track color */
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
   
   .card-body1 {
-    padding: 10px;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
    
   }
-  .meta-container {
-    display: flex;          /* Utiliza o layout flex */
-    overflow-x: auto;      /* Ativa a rolagem horizontal */
-    white-space: nowrap;   /* Garante que os itens não quebrem para a linha de baixo */
-    gap: 16px;             /* Espaçamento entre os itens */
-    padding: 10px;         /* Espaçamento interno do contêiner */
-}
 
-.meta {
-    background-color: rgb(212, 212, 212) !important;
-    flex: 0 0 auto;        /* Garante que cada meta ocupe apenas o espaço necessário */
-    min-width: 300px;      /* Define uma largura mínima para cada item */
-    border-radius: 8px;
-    padding: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+
+
 
 .meta-item {
   margin-bottom: 10px;
+  word-wrap: break-word; /* Evita cortar palavras longas */
+  overflow-wrap: break-word;
 }
   
   .meta-label {
@@ -150,15 +147,12 @@ body.pagina-relatorios{
   }
   
   .meta-value-large {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    
-  }
+}
   
   .meta-value-medium {
-    font-size: 1.0rem;
-    margin: 0px 10px;
-    font-weight: bold;
+    font-size: 1rem;
   }
   
   .meta-value-small-bold {
@@ -167,11 +161,14 @@ body.pagina-relatorios{
     font-weight: bold;
   }
   .meta-value-small {
-    font-size: 0.8rem;
-    margin: 0px 10px;
+    font-size: 1rem;
 
   }
-
+  .meta-description {
+    white-space: pre-wrap; /* Preserva quebras de linha e exibe texto completo */
+    text-align:center; /* Alinha o texto para melhor leitura */
+    padding: 5px 20px 5px 20px;
+}
   .meta-button {
     display: flex;
     justify-content: space-between; /* Distribui os botões com espaços iguais */
@@ -180,7 +177,7 @@ body.pagina-relatorios{
 }
 .meta-priority {
   font-weight: bold;
-  color: #007bff; /* Cor para destacar o nível de prioridade */
+ /* Cor para destacar o nível de prioridade */
 }
 .meta-value-play,
 .meta-value-edit,

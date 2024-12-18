@@ -13,6 +13,7 @@
     <script src="https://kit.fontawesome.com/0942946b25.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  
 <div class="fixed-bottom mb-0 d-flex justify-content-around bg-black">
     <div class="col text-center">
         <a href="../view/addatividade.php">
@@ -45,5 +46,6 @@
         </a>
     </div>
 </div>
+
 </body>
 </html>
